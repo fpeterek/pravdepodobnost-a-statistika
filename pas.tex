@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{xurl}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{bm}
 \usepackage[czech]{babel}
 
@@ -141,7 +142,7 @@ Korelacni koeficient je mirou linearni zavislosti dvou slozek nahodneho vektoru.
 
 Implikace, naopak predchozi vztah neplati
 
-\[ \rho(X, Y) = 0 \implies X, Y jsou nekorelovane \]
+\[ \rho(X, Y) = 0 \implies X, Y \text{jsou nekorelovane} \]
 
 \subsection{Alternativni rozdeleni}
 
@@ -154,9 +155,24 @@ Pouze dve moznosti, kazde ma svou pravdepodobnost
 
 \subsection{Binomicke rozdeleni}
 
+\[ X \rightarrow Bi(n, p) \]
+
+$n$ $\rightarrow$ velikost vyberu
+
+p $\rightarrow$ pravdepodobnost uspechu
+
 Provadim nezavisle pokusy (Bernoulliho pokusy), pravdepodobnost uspechu je konstantni
 
 Binomicke rozdeleni - pravdepodobnost, ze v $x$ pokusech se objevi $y$ uspechu
+
+Negativne binomicke rozdeleni -- pocet pokusu do $k$-teho uspechu vcetne
+
+\[ X \rightarrow NB(k, p) \]
+
+$k$ $\rightarrow$ k - pocet uspechu
+
+p $\rightarrow$ pravdepodobnost uspechu
+
 
 \begin{verbatim}
 
@@ -183,6 +199,248 @@ kdezto my chceme vsechny pokusy
 nbinom - negativne binomicke rozdeleni
 
 \end{verbatim}
+
+\subsection{Hypergeometricke rozdeleni}
+
+Popisuje pocet uspechu v \textbf{zavislych pokusech}.
+
+\[ X \rightarrow H(N, M, n) \]
+
+N -- velikost DS
+
+M -- pocet prvku s danou vlastnosti
+
+n -- velikost vyberu
+
+\begin{verbatim}
+
+[r|d|p|q]hyper()
+
+\end{verbatim}
+
+Je-li $\frac{n}{N} < 0.05$, lze hypergeom. rozdeleni nahradit binomickym
+s param. $n$ a $(M/N)$
+
+\subsection{Poissonovo rozdeleni}
+
+Modelujeme vyskyty udalosti na intervalu (plocha, cas, jakykoliv jiny interval)
+
+\begin{itemize}
+    \item \textbf{Ordinarita} -- pravdepodobnost vyskytu v limitne kratkem intevralu ($t \rightarrow 0$) je nulova
+    \item \textbf{Stacionarita} -- pravdepodobnost vyskytu zavisi pouze na delce intervalu
+    \item \textbf{Nezavisle prirustky} -- pocty udalosti v disjunktnich intervalech jsou nezavisle
+    \item \textbf{Beznaslednost} -- pravdepodobnost vyskytu nezavisi na case, ktery uplynul od minule udalosti
+\end{itemize}
+
+\textbf{Rychlost vyskytu udalosti: $\lambda$}
+
+\[ x \rightarrow Po(\lambda t) \]
+
+\[ E(X) = D(X) = \lambda t \]
+
+\[ (n > 30 \land p < 0.1) \implies Bi(n,p) \sim Po(np) \]
+
+Priklad:
+
+\text{Pocet vyskytu: 30 za hodinu}
+
+\text{Sledovane obdobi: 20 minut}
+
+\[ \lambda = 30 \]
+
+\[ t = 20 min \]
+
+\[ \lambda t = \frac{30}{3} = 10 \]
+
+\begin{verbatim}
+
+Pocet udalosti: 5
+Casove obdobi: 15
+
+ppois(5, lambda * 15)
+
+\end{verbatim}
+
+\subsection{Rovnomerne rozdeleni}
+
+Pravdepodobnost je konstantni na intervalu $(a;b)$, jinde je nulova
+
+\[ X \rightarrow R(a;b) \]
+
+\[ E(X) = \frac{a+b}{2}, D(X) = \frac{(a-b)^2}{12} \]
+
+
+\subsection{Exponencialni rozdeleni}
+
+Mejme Poissonuv proces.
+
+Potom \textbf{doba do vyskytu prvni udalosti, pripadne doba mezi udalostmi,} je modelovatelna exponencialnim
+rozdelenim.
+
+Bezpametove rozdeleni $\rightarrow$ doba do vyskytu udalosti nezavisi na predchozich vyskytech.
+
+\[ X \rightarrow Exp(\lambda) \]
+
+
+\begin{equation}
+    f(t)=\begin{cases}
+        \lambda * e^{-\lambda t}, & t > 0\\
+        0, & \text{jinak}.
+  \end{cases}
+\end{equation}
+
+\begin{equation}
+    f(t)=\begin{cases}
+        1 -  e^{-\lambda t}, & t > 0\\
+        0, & \text{jinak}.
+  \end{cases}
+\end{equation}
+
+\[ E(X) = \frac{1}{\lambda}, D(X) = \frac{1}{\lambda^2} \]
+
+
+Intezita poruch:
+
+\[ \lambda(t) = \frac{f(t)}{1 - F(t)} \]
+
+\begin{verbatim}
+
+lambda = 1/30
+interval = 10
+
+pexp(10, 1/30)   -- get probability
+
+quantile = 0.05
+
+qexp(0.05, 1/30)  -- get desired interval
+
+Pravdepodobnost, ze k T udalostem dojde drive nez v case X
+
+
+Prumerna doba: 10
+Pozadovany pocet udalosti = 50
+
+mu_ti = 10
+sigma_ti^2 = 10
+sigma_ti = sqrt(10)
+
+T = suma 100 Ti
+
+T ~ N(50 * 10, sqrt(10) * 100)
+T ~ N(udalosti * mu, sigma_ti * udalosti)
+
+pnorm(X, udalosti*mu, sigma_ti * udalosti)
+
+Vyplotovani:
+
+x = seq(0, 1000, by=1)
+y = dnorm(x, mean=udalosti*mu, sd=sigma_ti*udalosti)
+png(file="aaa.png")
+plot(x, y, type="l")
+dev.off()
+
+\end{verbatim}
+
+\subsection{Weibullovo rozdeleni}
+
+Modelovani doby do vyskytu udalosti, umoznuje modelovat obdobi casnych poruch
+a obdobi starnuti
+
+\[ X \rightarrow W(\Theta, \beta) \]
+
+$\Theta \rightarrow$ parametr meritka
+
+$\beta \rightarrow$ parametr tvaru
+
+\[ \lambda(t) = konstatnta * t^{\beta - 1} \]
+
+Distribucni funkce = 
+
+\begin{equation}
+    F(t)=\begin{cases}
+        1 - e^{-\frac{t}{\Theta}^\beta}, & t > 0\\
+        0, & \text{jinak}.
+  \end{cases}
+\end{equation}
+
+Hustota p.
+
+\begin{equation}
+    F(t)=\begin{cases}
+        \frac{\beta}{\Theta^{\beta}} t^{\beta - 1} e^{-\frac{t}{\Theta}^\beta}, & t > 0\\
+        0, & \text{jinak}.
+  \end{cases}
+\end{equation}
+
+Intenzita poruch:
+
+\[ \lambda(t) = \frac{\beta}{\Theta^\beta t^{\beta - 1}} \]
+
+Priklad:
+$\Theta = 50$
+
+Intenzita poruch je linearni a rostouci, tedy
+
+$\beta = 2$
+
+Hodnotu $\beta$ ziskame z nasledujiciho vzorce
+
+\[ \lambda(t) = konstatnta * t^{\beta - 1} \]
+
+Casovy interval - deset
+
+\[ X \rightarrow W(\Theta = 50, \beta = 2) \]
+
+Intenzita poruch -- dosazenim do vzorce
+
+\[ \lambda(10) = \frac{2}{50^2} 10^{2-1} = 0.008 \]
+
+Pravdepodobnost, ze system bude 100 hodin bezporuchovy
+
+\[ P(X > 100) = 1 - F(100) \]
+
+\begin{verbatim}
+
+pweibull(100, beta, Theta)
+
+1 - pweibull(100, 2, 50)
+
+\end{verbatim}
+
+\subsection{Erlangovo rozdeleni}
+
+Doba vyskytu do $k$-te udalosti v Poissonove procesu
+
+$k$ -- pocet udalosti
+
+$\lambda$ -- meritko
+
+\[ X_k \rightarrow Erlang(k, \lambda) \]
+
+\[ E(X_k) = \frac{k}{\lambda} \]
+
+\[ D(X_k) = \frac{k}{\lambda^2} \]
+
+\subsection{Normalni rozdeleni}
+
+$\mu$ -- stredni hodnota
+
+$\sigma^2$ -- rozptyl
+
+\[ X \rightarrow N(\mu; \sigma^2) \]
+
+Pravidlo 3$\sigma$
+
+99.8 \% prvku spada do intervalu $<\mu - 3\sigma; \mu + 3\sigma>$
+
+Q-Q graf = graficky nastroj pro overeni normality
+
+\begin{verbatim}
+qqline(data, col="blue")
+\end{verbatim}
+
+\section{Statistika}
+
 
 \end{document}
 
