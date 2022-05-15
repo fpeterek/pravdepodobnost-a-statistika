@@ -441,6 +441,282 @@ qqline(data, col="blue")
 
 \section{Statistika}
 
+Promenne
+
+\begin{itemize}
+    \item Kvalitativni
+        \begin{itemize}
+            \item Nominalni = nelze sortit
+            \item Ordinalni = lze sortit
+        \end{itemize}
+    \item Kvantitativni
+        \begin{itemize}
+            \item Diskretni
+            \item Spojite
+        \end{itemize}
+\end{itemize}
+
+\subsection{Nominalni hodnota}
+
+Cetnost
+
+Relativni cetnost
+
+\[ p_i = \frac{n_i}{n} \]
+
+Modus -- nejcastejsi prvek
+
+Histogram, vysecovy graf
+
+\subsection{Ordinalni promenna}
+
+Kumulativni cetnost, kumulativni relativni cetnost
+
+Soucet prvku varianty $x$ nebo nizsi
+
+Lorenzova krivka -- vynasim kumulativni cetnosti
+
+Paretova analyza, Paretuv princip - pravidlo $\frac {20} {80}$
+
+\subsection{Numericke promenne}
+
+Mira polohy a variability
+
+Prumer = $\bar{x}$
+
+Vlastnosti:
+\begin{itemize}
+    \item Soucet odchylek od prumeru je roven nule
+    \item Pricteme-li ke vsem hodnotam stejne cislo, o stejne cislo se zvedne prumer
+    \item vynasobime-li vsechny hodnoty stejnym cislem, stejnym pomerem se zvysi prumer
+\end{itemize}
+
+\textbf{Harmonicky prumer}
+
+Cast z celku, typicky uloha o spolecne praci
+
+\[ \bar{x}_H = \frac {n} { \sum_{i=1}^n \frac{1}{x_i} } \]
+
+Vazeny prumer
+
+\[ \bar{x}_H = \frac { \sum_{i-1}^k n_i } { \sum_{i=1}^n \frac{n_i}{x_i} } \]
+
+\textbf{Geometricky prumer}
+
+Relativni zmena
+
+\[ \bar{x}_G = \sqrt[n]{ x^{n_1}_1 * x^{n_2}_2 * ... * x^{n_k}_n } \]
+
+Modus:
+
+Pro diskretni hodnotu to je nejcetnejsi hodnota
+
+Pro spojitou to je hodnota, okolo ktere je nejvyssi koncentrace hodnot --
+urcujeme pomoci \textbf{shorthu} - co nejkratsi interval takovy, ze v nem lezi
+alespon 50 \% hodnot. Modus je potom stred shorthu.
+
+Kvantil -- rozdeluje dataset na dve casti, mensi nez kvantil a vetsi nez kvantil
+
+\textbf{Interkvartilove rozpeti IQR}
+
+\[ IQR = x_{0.75} - x_{0.25} \]
+
+\textbf{MAD}
+
+Mean Absolute Deviation
+
+median absolutnich odchylek kazde hodnoty od medianu
+
+\textbf{Vyberovy rozptyl}
+
+\[ s^2 = \frac { \sum_{i=1}^{n} (x_i - \bar{x})^2 } {n-1} \]
+
+Suma kvadratu odchylek od prumeru podeleno velikosti datasetu bez jedne
+
+Priceteme-li ke vsem hodnotam konstantu, rozptyl se nezmeni
+
+Vynasobime-li vsechny hodnoty konstantou, rozptyl se prenasobi kvadratem konstanty
+
+\textbf{Vyberova smerodatna odchylka}
+
+\[ \sqrt{s^2} \]
+
+\textbf{Variacni koeficient}
+
+Vyjadruje miru variability promenne $x$, lze stanovit pro promenne, ktere nabyvaji pouze kladnych hodnot pomoci vztahu
+
+\[ V_x = /frac V {\bar{x}} \]
+
+\subsection{Identifikace outliers}
+
+\textbf{Vnitrni hradby}
+
+\[ x_i < x_{0.25} - 1.5 * IQR \]
+
+nebo
+
+\[ x_i > x_{0.75} + 1.5 * IQR \]
+
+Pak $x_i$ je outlier
+
+\textbf{z-souradnice}
+
+z-skore$_i$ = $ \frac{x_i - \bar{x}} {s} $
+
+$|\text{z-skore$_i$}| > 3 \implies |  \left| \frac{x_i - \bar{x}}{s} \right| > 3 \implies |x_i - \bar{x}| > 3s \implies$ $x_i$ je outlier
+
+\textbf{$x_{0.5}$-souradnice}
+
+\[ |x_{0.5} - skore_i| = \left| \frac{x_i - x_{0.5}}{1.483 MAD} \right| > 3 \implies x_i \text{ je outlier} \]
+
+\textbf{Odlehla a extremni pozorovani}
+
+Odlehla:
+
+\[ h_D = x_{0.25} - 1.5IQR \]
+\[ h_D = x_{0.75} + 1.5IQR \]
+
+Extremni: 
+
+\[ H_D = x_{0.25} - 3IQR \]
+\[ H_D = x_{0.75} + 3IQR \]
+
+\textbf{Vyberova sikmost}
+
+\[ a = \frac{n}{(n-1)(n-2)} * \frac{ \sum_{i=1}^{n} (x_i - \bar{x})^3 }{s^3} \]
+
+a > 0 ... prevazuji hodnoty mensi nez prumer
+a < 0 ... prevazuji hodnoty vetsi nez prumer
+a = 0 ... symetricke rozlozeni
+
+\textbf{Vyberova spicatost}
+
+b = 0 ... odpovida normalnimu rozdeleni
+b > 0 ... spicate rozdeleni
+b < 0 ... ploche rozdeleni
+
+\subsection{Graficke znazorneni}
+
+\textbf{Box plot}
+
+\begin{verbatim}
+png(file='boxplot.png')
+boxplot(machine1, machine2, machine3, machine4, 
+        main='Prumery lozisek', ylab='mm', names=machine.names)
+dev.off()
+\end{verbatim}
+
+\subsection{Vyberove charakteristiky}
+
+Vyberovy prumer
+
+\textbf{Zakon velkych cisel}
+
+S rostoucim rozsahem vyberu se vyberovy prumer koncentruje stale vice okolo skutecneho prumeru
+
+\textbf{Centralni limitni veta}
+
+Nezavisle na rozdeleni, z ktereho $X_i$ pochazi, se pro dostatecne velky vyber rozdeleni prumeru
+blizi normalnimu rozdeleni
+
+Vyber neobsahuje odlehla pozorovani a rozsah je alespon 30
+
+Viz priklad u Exp rozdeleni
+
+\subsection{Relativni cetnost}
+
+\[ \bar{X} = \frac{\sum_{i=1}^{n} n}{X_i} = p \]
+
+Vlastnosti
+
+\[ E(p) = \mu_p \]
+\[ D(p) = \sigma_p^2\ = \frac{\pi (1 - \pi)}{n} \]
+
+\[p \sim N(\mu_p, \sigma_p^2)\]
+
+
+\textbf{Rozdil vyberovych prumeru}
+
+Vyber je max. dvacetina populace
+
+Vybery jsou nezavisle
+
+Plati predpoklady CLV -- vybery pochazi z norm. rozdeleni, nebo jsou dostatecne velke (30+)
+
+Pak plati:
+
+\[ E(\bar{X}_1 - \bar{X}_2) = \mu_1 - \mu_2 \]
+
+\[ D(\bar{X}_1 - \bar{X}_2) = \frac{\sigma_1^2}{n_1} + \frac{sigma_2^2}{n_2} \]
+
+\textbf{Rozdil relativnich cetnosti}
+
+Rozsah kazde z populaci je dostatecne velky (vyber je max desetina populace)
+
+Pro modelovani rozdilu lze pouzit norm. rozdeleni (dostatecne velke vybery)
+
+Vybery jsou nezavisle
+
+Pak plati:
+
+\[ E(p_1 - p_2) = \pi_1 - \pi_2 \]
+
+\[ D(p_1 - p_2) = \frac{\pi_1(1 - \pi_1)}{n1} + \frac{\pi_2(1 - \pi_2)}{n2}\]
+
+\[ (p_1 - p_2) \sim N(E(p_1 - p_2), D(p_1 - p_2)) \]
+
+\subsection{$\chi^2$ rozdeleni}
+
+Soucet ctvercu nahodnych velicin s normovanych normalnim rozdelenim
+
+Pocet nahodnych velicin = $\nu$ stupnu volnosti
+
+\[ X = \sum_{i=1}^{v} Z_i^2 \rightarrow \chi^2 \]
+
+Plati:
+
+\[ \frac{(n-1) S^2}{\sigma^2} = \chi^2_{n-1} \]
+
+\[E(X) = \nu, D(X) = 2\nu\]
+
+Pouziti:
+
+Test, zda rozptyl souboru s norm. rozdelenim je roven $\sigma_0^2$
+
+Overeni nezavislosti kategorialnich promennych
+
+Test dobre shody - zda nahodne veliciny pochazi z urciteho rozdeleni
+
+Priklad:
+
+$\mu = 5 \text{let}$
+
+$\sigma = 6 \text{mesicu}$
+
+$P(S > 7) = ?$
+
+\[ \frac{(n-1) S^2}{\sigma^2} \rightarrow \chi^2_{n-1} \]
+
+$X = \frac{(n-1)S^2}{\sigma^2}$
+
+\[ X \rightarrow \chi_{19}^2 \]
+
+$(X > \frac{19.7^2}{36}), \text{ tedy } (X > 25.86)$
+
+\[ 1 - F_{\chi_{19}^2} = 0.134 \]
+
+\begin{verbatim}
+1 - pchisq(q, df)
+1 - pchisq(25.86, 19)
+\end{verbatim}
+
+\subsection{Studentovo rozdeleni}
+
+Z - nahodna velicina o norm. rozdeleni
+V - nahodna velicina o $\chi^2$ rozdeleni s $\nu$ stupni volnosti
+
+\[ T = \frac{Z}{\sqrt{\frac{V} {\nu}}} \]
 
 \end{document}
+
 
