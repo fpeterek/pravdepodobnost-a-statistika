@@ -717,6 +717,135 @@ V - nahodna velicina o $\chi^2$ rozdeleni s $\nu$ stupni volnosti
 
 \[ T = \frac{Z}{\sqrt{\frac{V} {\nu}}} \]
 
+T ma Studentovo rozdeleni s $\nu$ stupni volnosti
+
+Pro $\nu$ vyssi nez 30 se Studentovo rozdeleni blizi normovanemu norm. rozdeleni
+
+\[E(T) = 0 \text{ pro } \nu > 0\]
+
+\[D(T) = \frac{\nu}{\nu - 2} \text{pro} \nu > 2 \]
+
+\textbf{Vlastnosti}
+
+Pokud $X_1, X_2, ..., X_3$ maji norm. rozdeleni a jsou navzajem nezavisle, potom
+
+\[ \frac{\bar{X} - \mu} {S} \sqrt{n} \]
+
+ma Studentovo rozdeleni $t$ s $n-1$ stupni volnosti
+
+\[ \frac{\bar{X} - \mu} {S} \sqrt{n} \rightarrow t_{n-1} \]
+
+Pouziti:
+
+Testovani hypotez o stredni hodnote, pokud je rozptyl neznamy
+a vyber pochazi z norm. rozdeleni
+
+Testovani hypotez o shode strednich hodnot, pokud mame dva nezavisle vybery, jejichz
+rozptyly jsou nezname, ale shodne
+
+Analyza vysledku regresni analyzy
+
+\subsection{Fisherovo-Snedecorovo rozdeleni}
+
+Dve nezavisle veliciny, V a W s rozdelenim $\chi^2$. Prvni ma $m$ stupnu volnosti,
+druhe $n$ stupnu volnosti. Pak nahodna velicina
+
+\[ F = \frac {\frac{V}{m}} {\frac{W}{n}} \]
+
+ma FS rozdeleni o $m$ a $n$ stupnich volnosti
+
+\[ F \rightarrow F_{m,n} \]
+
+\[ E(F) = \frac n {n-2} \text{pro} n>2 \]
+\[ D(F) = \frac {2n^2 (1 + \frac {n-2}{m})} {(n-2)^2 (n-4)} \text{pro} n>4 \]
+
+Pouziti:
+
+Test shody rozptylu dvou souboru
+
+Test shody strednich hodnot vice nez dvou zakladnich souboru
+
+Testy v regresni analyze
+
+\subsection{Teorie odhadu}
+
+\textbf{Bodove odhahy}
+
+\textbf{Intervalove odhady}
+
+Spolehlivost: $1 - \alpha$
+
+Hladina vyznamnosti: $\alpha$
+
+Odhad stredni hodnoty, znam-li smerodatnou odchylku
+
+\[ \bar{X} \sim N\left( \mu; \frac{\sigma^2}{n} \right) \]
+
+\subsection{Testovani hypotez}
+
+Parametricke testy
+
+Neparametricke testy
+
+Nulova a alternativni hypoteza
+
+Zamitame nebo nezamitame hypotezu -- nelze prijmout nebo potvrdit
+
+Chyba I. druhu -- nespravne zamitneme
+Chyba II. druhu -- nespravne nezamitneme
+
+Dva pristupy:
+
+Klasicky test
+
+Cisty test vyznamnosti
+
+\subsection{Klasicky test}
+
+formulace hypotez
+
+Volba statistiky
+
+Stanoveni $\alpha$
+
+Sestrojeni kritickeho oboru
+
+Vypocet pozorovane hodnoty
+
+Formulace zaveru
+
+\subsection{Cisty test vyznamnosti}
+
+Formulace hypotez
+
+Volba test. statistiky
+
+Vypocet pozorovane hodnoty
+
+Vypocet p-hodnoty
+
+Rozhodnuti na zaklade p-hodnoty
+
+\subsection{Test o rozptylu}
+
+$n=10$
+
+$H_0: \sigma^2 = \sigma^2_0$
+
+Priklad
+
+$H_0: \sigma^2 = 4$
+
+$\bar{x} = 170.3 \text{g}$
+
+$s^2$ - suma kvadratu odchylek deleno n-1
+
+$s^2 = 5,3 g^2$
+
+Normalita ze zadani
+
+\subsection{Jednovyberovy t-test}
+
 \end{document}
 
 
