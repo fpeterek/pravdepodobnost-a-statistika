@@ -1,0 +1,85 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{xurl}
+\usepackage[czech]{babel}
+
+\setlength{\parskip}{\baselineskip}
+\setlength{\parindent}{0pt}
+
+\newcommand{\fakesection}[1]{%
+  \par\refstepcounter{section}% Increase section counter
+  \sectionmark{#1}% Add section mark (header)
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}% Add section to ToC
+  % Add more content here, if needed.
+}
+
+\title{Pravděpodobnost a statistika}
+\date{15. květen 2022}
+\author{Filip Peterek}
+
+\begin{document}
+
+\maketitle
+
+\section{Pravděpodobnost}
+
+\subsection{Zakladni vzorce}
+
+Variace bez opakovani: \[V(n,k) = \frac{n!}{(n-k)!}\]
+
+Kombinace bez opakovani: \[C(n,k) = \frac{n!}{k!(n-k)!}\]
+
+Permutace: \[P(n) = n!\]
+
+Variace s opakovanim: \[V*(n,k) = n^k\]
+
+Kombinace s opakovanim: \[C*(n,k) = C*(n+k-1, k) = \frac{(n+k-1)!}{(n-1)! * k!}\]
+
+Permutace s opakovanim: \[P*(n_1, n_2, ..., n_k) = \frac{P(n)}{P(n_1) * P(n_2) * ... * P(n_k)} = \frac{n!}{n_1! * n_2! * ... * n_3!} \]
+
+Prunik jevu: \[P(A \cap B) = P(A|B) * P(B)\]
+
+Prunik nezavislych jevu: \[P(A \cap B) = P(A) * P(B)\]
+
+Podminena pravdepodobnost: \[P(A|B) = \frac{P(A \cap B)}{P(B)}\]
+
+\subsection {Bayesuv vzorec}
+
+Nastal jev A, hledam pravdepodobnost, ktery z jevu $B_i$ jev A zpusobil.
+
+\[ P(B_k|A) = \frac{P(A|B_k) * P(B_k)}{ \sum_{i=1}^{n} P(A|B_i) * P(B_i) } \]
+ 
+\subsection{Nahodna velicina}
+
+Stredni hodnota: 
+\[ \mu = \sum_{(i)} x_i * P(x_i) \]
+\[ \mu = \int_{-\infty}^{\infty} x_i * P(x_i) \]
+
+\[ E(aX + b) = aE(X) + b \]
+\[ E(\sum_i^n X_i) = \sum_i^n E(X_i) \]
+
+Centralni moment r-teho radu:
+
+\[ \mu_r' = \sum_{(i)} (x_i - E(X))^r * P(x_i) \]
+\[ \mu_r' = \int_{-\infty}^{\infty} (x_i - E(X))^r * P(x_i) \]
+
+Variance:
+
+\[ D(X) = \sum_{(i)} (x_i - E(X))^2 * P(x_i) \]
+
+\[ D(X) = \int_{-\infty}^{\infty} (x_i - E(X))^2 * P(x_i) \]
+
+\[ D(X) = E(X^2) - (E(X))^2 \]
+
+\[ D(aX + b) = a^2D(X) \]
+
+Smerodatna odchylka:
+
+\[ \sigma = \sqrt{D(X)} \]
+
+Sikmost:
+
+\[ \alpha_3 = \frac {\mu_3} {\sigma^3} \]
+
+\end{document}
+
