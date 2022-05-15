@@ -1,6 +1,8 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{xurl}
+\usepackage{amsmath}
+\usepackage{bm}
 \usepackage[czech]{babel}
 
 \setlength{\parskip}{\baselineskip}
@@ -80,6 +82,107 @@ Smerodatna odchylka:
 Sikmost:
 
 \[ \alpha_3 = \frac {\mu_3} {\sigma^3} \]
+
+Spicatost:
+
+\[ \alpha_4 = \frac {\mu_4} {\sigma^4} \]
+
+Modus: nejpocetnejsi prvek, prvek s nejvyssi pravdepodobnosti
+
+\subsection{Nahodny vektor}
+
+Vektor, jehoz slozky jsou nahodne veliciny
+
+Vztahy jsou ekvivalentni nahodne velicine, ale upravene pro vektor
+
+Ukazka:
+
+Necht $\boldsymbol{X} = (X, Y)$ je nahodny vektor. Potom plati:
+
+\[ E(\boldsymbol{X}) = (E(X), E(Y)) \]
+
+\subsection{Nezavislost nahodnych velicin}
+
+Necht $\boldsymbol{X} = (X, Y)$ je nahodny vektor. X, Y jsou nezavisle, prave kdyz plati:
+
+\[ F(x,y) = F_X(x) * F_Y(y) \]
+
+\subsection{Kovariance a koeficient korelace}
+
+\textbf{Kovariance $cov(X,Y)$}
+
+\[ cov(X,Y) = E[(X - E(X)) * (Y - E(Y))] \]
+
+Kladna hodnota kovariance: zvysi se X $\implies$ pravdepodobne se zvysi Y
+Zaporna hodnota kovariance: zvysi se X $\implies$ pravdepodobne se snizi Y
+
+\[ cov(X, Y) = E(XY) - E(X)*E(Y) \]
+\[ cov(X,X) = D(X) \]
+\[ cov(a_1X + b_1, a_2X + b_2) = a_1a_2cov(X,Y) \]
+
+Jsou-li X, Y nezavisle $\implies$ $cov(X,Y) = 0$
+
+\textbf{Korelacni koeficient $\rho(X, Y)$}
+
+\begin{equation}
+    \rho(X,Y)=\begin{cases}
+    \frac { cov(X,Y) } { \sqrt{D(X) * D(Y)} }, & D(X), D(Y) \neq 0\\
+    0, & \text{jinak}.
+  \end{cases}
+\end{equation}
+
+Korelacni koeficient je mirou linearni zavislosti dvou slozek nahodneho vektoru.
+
+\[ \rho(X, Y) = \rho(Y, X) \]
+
+\[ \rho(X, X) = 1 \]
+
+\[ X, Y \text{ jsou nezavisle } \implies \rho(X, Y) = 0 \]
+
+Implikace, naopak predchozi vztah neplati
+
+\[ \rho(X, Y) = 0 \implies X, Y jsou nekorelovane \]
+
+\subsection{Alternativni rozdeleni}
+
+Pouze dve moznosti, kazde ma svou pravdepodobnost
+
+\[ P(X=1) = p \]
+\[ P(X=0) = 1-p \]
+
+\[ E(X) = p, D(X) = p * (1 - p) \]
+
+\subsection{Binomicke rozdeleni}
+
+Provadim nezavisle pokusy (Bernoulliho pokusy), pravdepodobnost uspechu je konstantni
+
+Binomicke rozdeleni - pravdepodobnost, ze v $x$ pokusech se objevi $y$ uspechu
+
+\begin{verbatim}
+
+20 pokusu
+Pravdepodobnost jednoho uspechu je 0.3
+Pravdepodobnost, ze uspechu bude pet a mene ziskame
+
+pbinom(5, 20, 0.3)
+
+Pravdepodobnost, ze uspechu bude nad pet
+
+1 - pbinom(5, 20, 0.3)
+
+
+Pocet uspechu je 6
+Pozadovana pravdepodobnost pro 6 uspechu je 0.7
+Pravdepodobnost uspechu pri jednom pokusu je 0.3
+
+qnbinom(0.7, 6, 0.3) + 6
+
+Je treba pricist 6, bo R pocita jen neuspechy, 
+kdezto my chceme vsechny pokusy
+
+nbinom - negativne binomicke rozdeleni
+
+\end{verbatim}
 
 \end{document}
 
